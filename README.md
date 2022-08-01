@@ -1,6 +1,6 @@
 # train-iec-models
 ### How to run this repository.
-1. Clone this repository: !git clone https://github.com/nvhieu-04/train-iec-models
+1. Clone this repository: !git clone https://github.com/iec2-uit/iec-models
 2. **cd** into `train-iec-models` and install dependencies package: `pip install -r requirements.txt` 
 or run this: 
 
