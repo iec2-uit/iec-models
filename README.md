@@ -20,10 +20,10 @@ or run this:
 4. The Potato Leaf Dataset => 'Potato Dataset'
 5. iCassava 2019 Dataset => 'iCassava Dataset'
 
-*IEC.seed_everything(IEC.CFG['seed'])
-*IEC.folds
-*IEC.preprare_dataloader()
-*IEC.train_one_epoch()
-*IEC.valid_one_epoch()
+* IEC.seed_everything(IEC.CFG['seed'])
+* IEC.folds
+* IEC.preprare_dataloader()
+* IEC.train_one_epoch()
+* IEC.valid_one_epoch()
 
 https://colab.research.google.com/drive/13WWKR97NsVPYmJOa_ojecC6aVdaO1WXk?usp=sharing
