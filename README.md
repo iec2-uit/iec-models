@@ -21,6 +21,7 @@ or run this:
 5. iCassava 2019 Dataset => 'iCassava Dataset'
 
 * IEC.seed_everything(IEC.CFG['seed'])
+=> Function that sets seed for pseudo-random number generators
 * IEC.folds
 * IEC.preprare_dataloader()
 * IEC.train_one_epoch()
