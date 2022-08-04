@@ -23,6 +23,7 @@ or run this:
 * IEC.seed_everything(IEC.CFG['seed'])
 => Function that sets seed for pseudo-random number generators
 * IEC.folds
+=> Split dataset into k consecutive folds
 * IEC.preprare_dataloader()
 * IEC.train_one_epoch()
 * IEC.valid_one_epoch()
