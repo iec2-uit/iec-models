@@ -10,7 +10,7 @@ or run this:
 * !pip3 install catalyst
 * !pip install -U albumentations
 
-3. run `py main.py` for deafault parameters or you can customize by call class IEC like: 
+3. run `python3 main.py` for deafault parameters or you can customize by call class IEC like: 
 
 * IEC.download('name datasets')
 => These are 5 datasets you can download by type(still update more):
