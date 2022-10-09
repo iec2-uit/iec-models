@@ -1,4 +1,5 @@
 from glob import glob
+import imp
 from sklearn.model_selection import GroupKFold, StratifiedKFold
 import cv2
 from skimage import io
@@ -38,6 +39,7 @@ from io import BytesIO
 import pandas as pd
 import numpy as np
 import json
+import sys
 from sklearn.metrics import classification_report
 from sklearn.metrics import f1_score
 from sklearn.metrics import roc_auc_score
@@ -54,45 +56,6 @@ from albumentations import (
       )
 
 class IEC(Dataset):
-        
-    def __init__(self, df, data_root,
-                 transforms=None, 
-                 output_label=True, 
-                 one_hot_label=False,
-                 do_fmix=False, 
-                 fmix_params={
-                     'alpha': 1., 
-                     'decay_power': 3., 
-                     'shape': (CFG['img_size'], CFG['img_size']),
-                     'max_soft': True, 
-                     'reformulate': False
-                 },
-                 do_cutmix=False,
-                 cutmix_params={
-                     'alpha': 1,
-                 },
-                
-
-                ):
-        
-        super().__init__()
-        self.df = df.reset_index(drop=True).copy()
-        self.transforms = transforms
-        self.data_root = data_root
-        self.do_fmix = do_fmix
-        self.fmix_params = fmix_params
-        self.do_cutmix = do_cutmix
-        self.cutmix_params = cutmix_params
-        self.output_label = output_label
-        self.one_hot_label = one_hot_label
-    
-        if output_label == True:
-            self.labels = self.df['label'].values
-            #print(self.labels)
-            
-            if one_hot_label is True:
-                self.labels = np.eye(self.df['label'].max()+1)[self.labels]
-                #print(self.labels)
     CFG = {
         'fold_num': 5,
         'seed': 719,
@@ -114,7 +77,6 @@ class IEC(Dataset):
         'device': 'cuda:0'
       #  'device': 'cpu'
     }
-    
     def rand_bbox(size, lam):
       W = size[0]
       H = size[1]
@@ -155,7 +117,47 @@ class IEC(Dataset):
                 Resize(IEC.CFG['img_size'], IEC.CFG['img_size']),
                 Normalize(mean=[0.485, 0.456, 0.406], std=[0.229, 0.224, 0.225], max_pixel_value=255.0, p=1.0),
                 ToTensorV2(p=1.0),
-            ], p=1.)        
+            ], p=1.)
+        
+    def __init__(self, df, data_root,
+                 transforms=None, 
+                 output_label=True, 
+                 one_hot_label=False,
+                 do_fmix=False, 
+                 fmix_params={
+                     'alpha': 1., 
+                     'decay_power': 3., 
+                     'shape': (CFG['img_size'], CFG['img_size']),
+                     'max_soft': True, 
+                     'reformulate': False
+                 },
+                 do_cutmix=False,
+                 cutmix_params={
+                     'alpha': 1,
+                 },
+                
+
+                ):
+        
+        super().__init__()
+        self.df = df.reset_index(drop=True).copy()
+        self.transforms = transforms
+        self.data_root = data_root
+        self.do_fmix = do_fmix
+        self.fmix_params = fmix_params
+        self.do_cutmix = do_cutmix
+        self.cutmix_params = cutmix_params
+        self.output_label = output_label
+        self.one_hot_label = one_hot_label
+    
+        if output_label == True:
+            self.labels = self.df['label'].values
+            #print(self.labels)
+            
+            if one_hot_label is True:
+                self.labels = np.eye(self.df['label'].max()+1)[self.labels]
+                #print(self.labels)
+            
     def __len__(self):
         return self.df.shape[0]
     
@@ -232,35 +234,46 @@ class IEC(Dataset):
         else:
             return img
 
-    def download(name = 'all'):
-            if(name == 'Corn Dataset'):
-                 url = 'http://20.219.152.250/Corn-Dataset'
-            elif(name == 'Potato Dataset'):
-                url = 'http://20.219.152.250/Potato-Dataset'
-            elif(name == 'Wheat Dataset'):
-                url = 'http://20.219.152.250/Wheat-Dataset'
-            elif (name == 'Rice Dataset'):
-                url = 'http://20.219.152.250/Rice-Dataset'
-            elif (name == 'iCassava Dataset'):
-                url = 'http://20.219.152.250/iCassava-Dataset'
-            else:
+    def download(name = 'errors'):
+            if(name == 'errors'):
+                datasetsAvailable = [' Plant Village Dataset','Minileaves Dataset','An Image Dataset for Field Crop Disease Identification','A Data Repository of Leaf Images Dataset','PlantDoc Dataset','PDDB Dataset','XDB Dataset','The Plantaek Dataset','Red Rot Sugarcane Disease Leaf Dataset','Sugarcane Disease Dataset','Corn Leaf Infection Dataset','Corn Leaf Diseases Dataset','Yellow Rush 19 Dataset','Wheat Disease Detection Dataset','Wheat Fungi Diseases Dataset','Wheat Leaf Dataset','Rice Leaf Disease Image Samples Dataset','Rice Diseases Image Dataset','Rice Disease Dataset','The Dhan-Shomadhan Dataset',
+                'Rice Leaf Diseases Dataset','The Potato Leaf Dataset','The JMuBEN 3 Dataset','The Soybean Leaf Dataset','iCassava 2019 Dataset',
+                'The Tomato Leaf Image Dataset','Plant Pathology 2020 Dataset','The Cotton Leaf Disease Dataset','The Cotton Leaf Dataset',
+                'HERMOS Dataset','Conghua Citrus Leaf 2020 Dataset','A Citrus Fruits and Leaves Dataset','Citrus Leaves Prepared Dataset','LeLePhid Dataset','DiaMOS Plant Dataset','BRACOL Dataset','RoCoLe Dataset' ]
                 print('There are no dataset you want. Try again.')
+                print('Available datasets are: ')
+                for i in range(len(datasetsAvailable)):
+                    print(i +'. '+ datasetsAvailable[i])
                 return
-            
-            local_filename = url.split('/')[-1]+'.zip'
-            r = requests.get(url, allow_redirects=True)
-            open(local_filename, 'wb').write(r.content)
-            print('Download models complete.')
-            
-            with ZipFile(local_filename, 'r') as zip:
-                # printing all the contents of the zip file
-                #zip.printdir()
-                # extracting all the files
-                print('Extracting all the files now...')
-                zip.extractall('./model_data/')
-            train = pd.read_csv('/content/train-iec-models/model_data/train.csv')
-            
-            return local_filename
+            else:
+                nameDownload = name.replace(' ', '-')
+                url = 'http://20.219.152.250/' + nameDownload
+                local_filename = url.split('/')[-1]+'.zip'
+                print('Starting Download, Please wait.....')
+                chunk_size = 4096
+                r = requests.get(url, stream=True)
+                with open(local_filename, 'wb') as f:
+                   print("Downloading %s" % local_filename)
+                   response = requests.get(url, stream=True)
+                   total_length = response.headers.get('content-length')
+                   if total_length is None: # no content length header
+                      f.write(response.content)
+                   else:
+                        dl = 0
+                        total_length = int(total_length)
+                        for data in response.iter_content(int(total_length / 100)):
+                            dl += len(data)
+                            f.write(data)
+                            done = int(50 * dl / total_length)
+                            sys.stdout.write("\r[%s%s]" % ('=' * done, ' ' * (50-done))  )
+                            sys.stdout.flush()
+
+                print('\nDownload '+ name +' complete.')
+                with ZipFile(local_filename, 'r') as zip:
+                    print('Extracting all the files now...')
+                    zip.extractall('./model_data/')
+                # train = pd.read_csv('/content/train-iec-models/model_data/train.csv')
+                return local_filename
 
     def prepare_dataloader(df, trn_idx, val_idx, data_root='/content/train-iec-models/model_data/train_images'):
     
