@@ -240,9 +240,8 @@ class IEC(Dataset):
                 for d in data:
                     if(d['name'] == name):
                         link = d['link']
-
                 url =  link
-                local_filename = url.split('/')[-1]+'.zip'
+                local_filename = url.split('/')[-1]
                 print('Starting Download, Please wait.....')
                 chunk_size = 4096
                 r = requests.get(url, stream=True)
