@@ -59,10 +59,7 @@ class IEC(Dataset):
     CFG = {
         'fold_num': 5,
         'seed': 719,
-        #'model_arch': 'tf_efficientnet_b4_ns',
-        'model_arch': 'vit_base_patch16_224',
-        #'model_arch': 'vit_small_resnet50d_s3_224',
-        #'img_size': 512,
+        'model_arch': 'levit_256',
         'img_size': 224,
         'epochs': 10,
         'train_bs': 9,
@@ -236,18 +233,15 @@ class IEC(Dataset):
 
     def download(name = 'errors'):
             if(name == 'errors'):
-                datasetsAvailable = [' Plant Village Dataset','Minileaves Dataset','An Image Dataset for Field Crop Disease Identification','A Data Repository of Leaf Images Dataset','PlantDoc Dataset','PDDB Dataset','XDB Dataset','The Plantaek Dataset','Red Rot Sugarcane Disease Leaf Dataset','Sugarcane Disease Dataset','Corn Leaf Infection Dataset','Corn Leaf Diseases Dataset','Yellow Rush 19 Dataset','Wheat Disease Detection Dataset','Wheat Fungi Diseases Dataset','Wheat Leaf Dataset','Rice Leaf Disease Image Samples Dataset','Rice Diseases Image Dataset','Rice Disease Dataset','The Dhan-Shomadhan Dataset',
-                'Rice Leaf Diseases Dataset','The Potato Leaf Dataset','The JMuBEN 3 Dataset','The Soybean Leaf Dataset','iCassava 2019 Dataset',
-                'The Tomato Leaf Image Dataset','Plant Pathology 2020 Dataset','The Cotton Leaf Disease Dataset','The Cotton Leaf Dataset',
-                'HERMOS Dataset','Conghua Citrus Leaf 2020 Dataset','A Citrus Fruits and Leaves Dataset','Citrus Leaves Prepared Dataset','LeLePhid Dataset','DiaMOS Plant Dataset','BRACOL Dataset','RoCoLe Dataset' ]
-                print('There are no dataset you want. Try again.')
-                print('Available datasets are: ')
-                for i in range(len(datasetsAvailable)):
-                    print(i +'. '+ datasetsAvailable[i])
                 return
             else:
-                nameDownload = name.replace(' ', '-')
-                url = 'http://20.219.152.250/' + nameDownload
+                r = requests.get("https://server-datasets-noqxfy4uf-nvhieu-04.vercel.app/datasets")
+                data = r.json()
+                for d in data:
+                    if(d['name'] == name):
+                        link = d['link']
+
+                url =  link
                 local_filename = url.split('/')[-1]+'.zip'
                 print('Starting Download, Please wait.....')
                 chunk_size = 4096
@@ -319,7 +313,7 @@ class IEC(Dataset):
           
                 image_preds = model(imgs)   #output = model(input)
 
-                loss = loss_fn(image_preds, image_labels)
+                loss = loss_fn(image_preds[0], image_labels)
                 
                 scaler.scale(loss).backward()
 
