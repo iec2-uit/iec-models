@@ -12,7 +12,7 @@ from torch import nn
 if __name__ == '__main__':
      # for training only, need nightly build pytorch
     IEC.download()
-    train = pd.read_csv('/content/train-iec-models/model_data/train.csv')
+    train = pd.read_csv('/content/iec-models/model_data/train.csv')
     train = train[train['label']==0]
     IEC.seed_everything(IEC.CFG['seed'])
     
@@ -21,9 +21,7 @@ if __name__ == '__main__':
     print(device)
         
     model = CassvaImgClassifier(IEC.CFG['model_arch'], train.label.nunique(), pretrained=True).to(device)
-    #print(model)
-    #model.load_state_dict(torch.load('./result/vit_small_resnet50d_s3_224_fold_3_32'))
-    #model.eval()
+
     
     for fold, (trn_idx, val_idx) in enumerate(IEC.folds):
         # we'll train fold 0 first
@@ -32,8 +30,8 @@ if __name__ == '__main__':
 
         print('Training with {} started'.format(fold))
 
-        print(len(trn_idx), len(val_idx))
-        train_loader, val_loader = IEC.prepare_dataloader(train, trn_idx, val_idx, data_root='/content/train-iec-models/model_data/train_images')
+        #print(len(trn_idx), len(val_idx))
+        train_loader, val_loader = IEC.prepare_dataloader(train, trn_idx, val_idx, data_root='/content/iec-models/model_data/train_images')
         #print(len(train_loader),len(val_loader))
 
         #scaler = GradScaler()   
