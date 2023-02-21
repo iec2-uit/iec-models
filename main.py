@@ -13,15 +13,14 @@ if __name__ == '__main__':
      # for training only, need nightly build pytorch
     IEC.download()
     train = pd.read_csv('/content/iec-models/model_data/train.csv')
-    train = train[train['label']==0]
+
     IEC.seed_everything(IEC.CFG['seed'])
     
     IEC.folds = StratifiedKFold(n_splits=IEC.CFG['fold_num'], shuffle=True, random_state=IEC.CFG['seed']).split(np.arange(train.shape[0]), train.label.values)
     device = torch.device(IEC.CFG['device'])
     print(device)
         
-    model = CassvaImgClassifier(IEC.CFG['model_arch'], train.label.nunique(), pretrained=True).to(device)
-
+    model = torch.hub.load('facebookresearch/LeViT:main', 'LeViT_256', num_classes= 4, pretrained=False).to(device)
     
     for fold, (trn_idx, val_idx) in enumerate(IEC.folds):
         # we'll train fold 0 first

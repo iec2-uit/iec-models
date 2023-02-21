@@ -61,7 +61,7 @@ class IEC(Dataset):
         'seed': 719,
         'model_arch': 'levit_256',
         'img_size': 224,
-        'epochs': 10,
+        'epochs': 1,
         'train_bs': 9,
         'valid_bs': 9,
         'T_0': 10,
@@ -306,7 +306,7 @@ class IEC(Dataset):
         for step, (imgs, image_labels) in pbar:
             imgs = imgs.to(device).float()
             image_labels = image_labels.to(device).long()
-            print(imgs,image_labels)
+            #print(imgs,image_labels)
             scaler = GradScaler()
             with autocast():
           
