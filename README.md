@@ -37,7 +37,7 @@ These are currently 25 datasets you can download by name as described [here](htt
 * IEC.train_one_epoch()
   * This function finds the best combination of weights and bias for minimizing the loss value.
 * IEC.valid_one_epoch()
-  * This function evaluate the model performance after training with data.
+  * This function evaluates the model performance after training with data.
 
 
 
