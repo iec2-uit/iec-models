@@ -19,24 +19,25 @@ This framework provides 38 public leaf disease datasets, collected from research
 
 * IEC.download('name datasets')
 
-This function supports download available leaf disease datasets from our cloud.
+  * This function supports download available leaf disease datasets from our cloud.
 These are currently 25 datasets you can download by name as described [here](https://github.com/iec2-uit/iec-models/releases/tag/List_of_Dataset_names_v1.0).
 
 * IEC.seed_everything(IEC.CFG['seed'])
 
-This function sets a seed value for pseudo-random number generators, which guarantees the reproductivity of deep learning algorithm implemented by Pytorch.
+  * This function sets a seed value for pseudo-random number generators, which guarantees the reproductivity of deep learning algorithm implemented by Pytorch.
 
 * IEC.folds()
 
-This function splits dataset into k consecutive folds, which keeps the ratio between classes in each fold constant as in the original dataset.
+  * This function splits dataset into k consecutive folds, which keeps the ratio between classes in each fold constant as in the original dataset.
 
 * IEC.preprare_dataloader()
 
-This function prepares the training and evaluation datasets according to the training/evaluation ratio.
+  * This function prepares the training and evaluation datasets according to the training/evaluation ratio.
 
 * IEC.train_one_epoch()
-
+  * This function finds the best combination of weights and bias for minimizing the loss value.
 * IEC.valid_one_epoch()
+  * This function evaluate the model performance after training with data.
 
 
 
