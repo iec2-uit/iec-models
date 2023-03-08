@@ -14,7 +14,7 @@ This framework provides 38 public leaf disease datasets, collected from research
   * !pip3 install catalyst
   * !pip install -U albumentations
 
-3. run `python3 main.py` for default parameters or you can customize by call class IEC like: 
+3. Run `python3 main.py` with your parameters and models via supported pipeline from our IEC library with 6 functions:
 
 * IEC.download('name datasets')
 => These are 25 datasets you can download by name as described [here](https://github.com/iec2-uit/iec-models/releases/tag/List_of_Dataset_names_v1.0).
