@@ -17,7 +17,8 @@ This framework provides 38 public leaf disease datasets, collected from research
 3. Run `python3 main.py` with your parameters and models via the supported pipeline from our IEC library with 6 functions:
 
 * IEC.download('name datasets')
-=> These are 25 datasets you can download by name as described [here](https://github.com/iec2-uit/iec-models/releases/tag/List_of_Dataset_names_v1.0).
+This function supports download available leaf disease datasets from our cloud.
+These are currently 25 datasets you can download by name as described [here](https://github.com/iec2-uit/iec-models/releases/tag/List_of_Dataset_names_v1.0).
 
 
 
