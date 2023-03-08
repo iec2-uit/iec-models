@@ -5,6 +5,7 @@ This framework provides 38 public leaf disease datasets, collected from research
 ### How to use this repository.
 1. Clone this repository: !git clone https://github.com/iec2-uit/iec-models
 2. Install prerequisites library
+
 **cd** into `train-iec-models` and install dependencies package: `pip install -r requirements.txt` 
 or run this: 
 
