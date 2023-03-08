@@ -4,16 +4,16 @@ This repository is the official instruction of Leaf Disease Dataset Framework, a
 This framework provides 38 public leaf disease datasets, collected from research platforms (e.g., Google Scholar, IEEE Xplore, Kaggle, Data Mendeley).
 ### How to use this repository.
 1. Clone this repository: !git clone https://github.com/iec2-uit/iec-models
-2. Install prerequisites library
+2. Install prerequisites libraries: 
+* **cd** into `train-iec-models` and install dependencies package: 
+**`pip install -r requirements.txt` 
+*or run this: 
 
-  **cd** into `train-iec-models` and install dependencies package: `pip install -r requirements.txt` 
-or run this: 
-
-* !pip3 install timm
-* !pip3 install pydicom
-* !pip3 install git+https://github.com/albumentations-team/albumentations
-* !pip3 install catalyst
-* !pip install -U albumentations
+** !pip3 install timm
+** !pip3 install pydicom
+** !pip3 install git+https://github.com/albumentations-team/albumentations
+** !pip3 install catalyst
+** !pip install -U albumentations
 
 3. run `python3 main.py` for default parameters or you can customize by call class IEC like: 
 
