@@ -22,7 +22,7 @@ This framework provides 38 public leaf disease datasets, collected from research
   * This function supports download available leaf disease datasets from our cloud.
 These are currently 25 datasets you can download by name as described [here](https://github.com/iec2-uit/iec-models/releases/tag/List_of_Dataset_names_v1.0).
 
-* IEC.seed_everything(IEC.CFG['seed'])
+* IEC.seed_everything('seed value')
 
   * This function sets a seed value for pseudo-random number generators, which guarantees the reproductivity of deep learning algorithm implemented by Pytorch.
 
