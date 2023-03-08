@@ -26,7 +26,7 @@ These are currently 25 datasets you can download by name as described [here](htt
 
 This function sets a seed value for pseudo-random number generators, which guarantees the reproductivity of deep learning algorithm implemented by Pytorch.
 
-* IEC.folds
+* IEC.folds()
 
 This function splits dataset into k consecutive folds, which keeps the ratio between classes in each fold constant as in the original dataset.
 
