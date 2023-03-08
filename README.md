@@ -1,5 +1,5 @@
 # Leaf Disease Dataset Framework
-This repository is the official instruction of Leaf Disease Dataset Framework, a cloud collection datasets published from article: "**Towards Sustainable Agriculture: A Lightweight Hybrid Model and Cloud-based Collection of Datasets for Efficient Leaf Disease Detection**.".
+This repository is the official instruction of Leaf Disease Dataset Framework, a cloud collection datasets published from article: "**Towards Sustainable Agriculture: A Lightweight Hybrid Model and Cloud-based Collection of Datasets for Efficient Leaf Disease Detection**".
 
 This framework provides 38 public leaf disease datasets, collected from research platforms (e.g., Google Scholar, IEEE Xplore, Kaggle, Data Mendeley).
 ### How to use this repository.
