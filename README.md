@@ -39,5 +39,12 @@ These are currently 31 datasets you can download by name as described [here](htt
 * IEC.valid_one_epoch()
   * This function evaluates the model performance after training with data.
 
-
+### If you use this github for a paper please cite:
+@article{thai2023towards,
+  title={Towards sustainable agriculture: A lightweight hybrid model and cloud-based collection of datasets for efficient leaf disease detection},
+  author={Thai, Huy-Tan and Le, Kim-Hung and Nguyen, Ngan Luu-Thuy},
+  journal={Future Generation Computer Systems},
+  year={2023},
+  publisher={Elsevier}
+}
 
