@@ -235,7 +235,7 @@ class IEC(Dataset):
             if(name == 'errors'):
                 return
             else:
-                r = requests.get("http://104.238.151.188:3000/datasets/link")
+                r = requests.get("http://149.28.146.58:3000/datasets/link")
                 data = r.json()
                 for d in data:
                     if(d['name'] == name):
@@ -306,7 +306,7 @@ class IEC(Dataset):
         for step, (imgs, image_labels) in pbar:
             imgs = imgs.to(device).float()
             image_labels = image_labels.to(device).long()
-            #print(imgs,image_labels)
+            # print(imgs,image_labels)
             scaler = GradScaler()
             with autocast():
           
@@ -392,8 +392,8 @@ class IEC(Dataset):
         np.random.seed(seed)
         torch.manual_seed(seed)
         torch.cuda.manual_seed(seed)
-        torch.backends.cudnn.deterministic = True
-        torch.backends.cudnn.benchmark = True
+        torch.backends.cudnn.deterministic = False
+        torch.backends.cudnn.benchmark = False
     
     def get_img(path = '/content/iec-models/model_data/train_images/'):
         im_bgr = cv2.imread(path)
