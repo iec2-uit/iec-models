@@ -1,5 +1,6 @@
 from glob import glob
-import imp
+# import imp
+from importlib import import_module
 from sklearn.model_selection import GroupKFold, StratifiedKFold
 import cv2
 from skimage import io
@@ -423,3 +424,4 @@ class IEC(Dataset):
       f1 = 2* (precision*recall) / (precision + recall + epsilon)
       #f1.requires_grad = is_training
       return f1
+
