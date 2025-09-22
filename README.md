@@ -14,7 +14,7 @@ This framework provides 38 public leaf disease datasets, collected from research
   * !pip3 install catalyst
   * !pip install -U albumentations==1.3.0
   * !pip install utils
-3. Run `python3 main.py` or colab notebook (https://colab.research.google.com/drive/13WWKR97NsVPYmJOa_ojecC6aVdaO1WXk?usp=sharing
+3. Run `python3 main.py` or colab notebook (https://colab.research.google.com/drive/1isede0YB5hRCXHJ4nC-tVWi_wOVx4qQW?usp=sharing
 ) with your parameters and models via the supported pipeline from our IEC library with 6 functions:
 
 * IEC.download('name datasets')
@@ -47,4 +47,5 @@ These are currently 31 datasets you can download by name as described [here](htt
   year={2023},
   publisher={Elsevier}
 }
+
 
